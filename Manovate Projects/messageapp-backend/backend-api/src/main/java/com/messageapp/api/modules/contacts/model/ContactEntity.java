@@ -28,7 +28,7 @@ public class ContactEntity {
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // Getters & Setters
+
     public Long getId() {
         return id;
     }

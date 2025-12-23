@@ -17,7 +17,6 @@ import java.util.List;
             this.contactsService = contactsService;
         }
 
-        // ADD CONTACT
         @PostMapping
         public void addContact(
                 @RequestHeader("X-USER-ID") Long ownerUserId,
@@ -34,7 +33,7 @@ import java.util.List;
         }
 
 
-        // REMOVE CONTACT
+
         @DeleteMapping("/{contactUserId}")
         public void removeContact(
                 @RequestHeader("X-USER-ID") Long ownerUserId,
@@ -43,7 +42,7 @@ import java.util.List;
             contactsService.removeContact(ownerUserId, contactUserId);
         }
 
-        // FETCH CONTACT LIST
+
         @GetMapping
         public List<ContactResponse> getContacts(
                 @RequestHeader("X-USER-ID") Long ownerUserId
@@ -51,7 +50,7 @@ import java.util.List;
             return contactsService.getContacts(ownerUserId);
         }
 
-        // BLOCK CONTACT
+
         @PostMapping("/{contactUserId}/block")
         public void blockContact(
                 @RequestHeader("X-USER-ID") Long ownerUserId,
@@ -60,7 +59,7 @@ import java.util.List;
             contactsService.blockContact(ownerUserId, contactUserId);
         }
 
-        // UNBLOCK CONTACT
+
         @PostMapping("/{contactUserId}/unblock")
         public void unblockContact(
                 @RequestHeader("X-USER-ID") Long ownerUserId,
