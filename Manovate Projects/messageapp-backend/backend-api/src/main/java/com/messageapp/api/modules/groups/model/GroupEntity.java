@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "groups")
-public class Group {
+public class GroupEntity {
 
     @Id
     @GeneratedValue
@@ -30,12 +30,6 @@ public class Group {
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-	@Override
-	public String toString() {
-		return "Group [id=" + id + ", name=" + name + ", iconUrl=" + iconUrl + ", createdBy=" + createdBy
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
-	}
 
 	public UUID getId() {
 		return id;
@@ -83,6 +77,12 @@ public class Group {
 
 	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	@Override
+	public String toString() {
+		return "GroupEntity [id=" + id + ", name=" + name + ", iconUrl=" + iconUrl + ", createdBy=" + createdBy
+				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
     
 }

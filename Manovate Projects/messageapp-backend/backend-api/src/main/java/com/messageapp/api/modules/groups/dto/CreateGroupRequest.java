@@ -1,8 +1,14 @@
-package com.messageapp.api.modules.groups.model;
+package com.messageapp.api.modules.groups.dto;
 
 import java.util.List;
 import java.util.UUID;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+@Data
+@Setter
+@Getter
 public class CreateGroupRequest {
     private String name;
     private String iconUrl;
@@ -24,10 +30,6 @@ public class CreateGroupRequest {
 	}
 	public void setMemberIds(List<UUID> memberIds) {
 		this.memberIds = memberIds;
-	}
-	@Override
-	public String toString() {
-		return "CreateGroupRequest [name=" + name + ", iconUrl=" + iconUrl + "]";
 	}
     
 }

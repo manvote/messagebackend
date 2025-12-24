@@ -4,7 +4,7 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.messageapp.api.modules.groups.model.Group;
+import com.messageapp.api.modules.groups.model.GroupEntity;
 
-public interface GroupRepository extends JpaRepository<Group, UUID> {
+public interface GroupRepo extends JpaRepository<GroupEntity, UUID> {
 }

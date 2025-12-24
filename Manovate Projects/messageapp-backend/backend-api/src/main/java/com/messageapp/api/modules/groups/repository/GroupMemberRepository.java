@@ -6,11 +6,11 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.messageapp.api.modules.groups.model.GroupMember;
+import com.messageapp.api.modules.groups.model.GroupMemberEntity;
 
-public interface GroupMemberRepository extends JpaRepository<GroupMember, UUID> {
+public interface GroupMemberRepository extends JpaRepository<GroupMemberEntity, UUID> {
 
-    Optional<GroupMember> findByGroupIdAndUserId(UUID groupId, UUID userId);
+    Optional<GroupMemberEntity> findByGroupIdAndUserId(UUID groupId, UUID userId);
 
-    List<GroupMember> findByGroupId(UUID groupId);
+    List<GroupMemberEntity> findByGroupId(UUID groupId);
 }

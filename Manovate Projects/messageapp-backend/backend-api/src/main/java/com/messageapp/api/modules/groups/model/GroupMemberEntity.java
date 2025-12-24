@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "group_members")
-public class GroupMember {
+public class GroupMemberEntity {
 
     @Id
     @GeneratedValue
@@ -25,7 +25,7 @@ public class GroupMember {
     private UUID userId;
 
     @Enumerated(EnumType.STRING)
-    private GroupRole role;
+    private GroupRoles role;
 
     @CreationTimestamp
     private LocalDateTime joinedAt;
@@ -54,11 +54,11 @@ public class GroupMember {
 		this.userId = userId;
 	}
 
-	public GroupRole getRole() {
+	public GroupRoles getRole() {
 		return role;
 	}
 
-	public void setRole(GroupRole role) {
+	public void setRole(GroupRoles role) {
 		this.role = role;
 	}
 
@@ -72,9 +72,8 @@ public class GroupMember {
 
 	@Override
 	public String toString() {
-		return "GroupMember [id=" + id + ", groupId=" + groupId + ", userId=" + userId + ", joinedAt=" + joinedAt + "]";
+		return "GroupMemberEntity [id=" + id + ", groupId=" + groupId + ", userId=" + userId + ", role=" + role
+				+ ", joinedAt=" + joinedAt + "]";
 	}
-    
-    
     
 }

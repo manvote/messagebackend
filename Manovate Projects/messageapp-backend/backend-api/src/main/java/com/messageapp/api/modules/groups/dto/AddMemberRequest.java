@@ -1,7 +1,9 @@
-package com.messageapp.api.modules.groups.model;
+package com.messageapp.api.modules.groups.dto;
 
 import java.util.UUID;
 
+import lombok.Data;
+@Data
 public class AddMemberRequest {
     private UUID userId;
 
@@ -12,10 +14,6 @@ public class AddMemberRequest {
 	public void setUserId(UUID userId) {
 		this.userId = userId;
 	}
-
-	@Override
-	public String toString() {
-		return "AddMemberRequest []";
-	}
+    
     
 }

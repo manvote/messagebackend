@@ -1,11 +1,11 @@
-package com.messageapp.api.modules.groups.model;
+package com.messageapp.api.modules.groups.dto;
+
+import lombok.Data;
+
+@Data
 public class UpdateGroupRequest {
     private String name;
     private String iconUrl;
-	@Override
-	public String toString() {
-		return "UpdateGroupRequest [name=" + name + ", iconUrl=" + iconUrl + "]";
-	}
 	public String getName() {
 		return name;
 	}
@@ -17,6 +17,10 @@ public class UpdateGroupRequest {
 	}
 	public void setIconUrl(String iconUrl) {
 		this.iconUrl = iconUrl;
+	}
+	@Override
+	public String toString() {
+		return "UpdateGroupRequest [name=" + name + ", iconUrl=" + iconUrl + "]";
 	}
     
 }

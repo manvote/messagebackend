@@ -12,21 +12,21 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.messageapp.api.modules.groups.model.AddMemberRequest;
-import com.messageapp.api.modules.groups.model.CreateGroupRequest;
-import com.messageapp.api.modules.groups.model.Group;
-import com.messageapp.api.modules.groups.model.UpdateGroupRequest;
-import com.messageapp.api.modules.groups.service.GroupService;
+import com.messageapp.api.modules.groups.dto.AddMemberRequest;
+import com.messageapp.api.modules.groups.dto.CreateGroupRequest;
+import com.messageapp.api.modules.groups.dto.UpdateGroupRequest;
+import com.messageapp.api.modules.groups.model.GroupEntity;
+import com.messageapp.api.modules.groups.service.GroupServiceLayer;
 
 @RestController
 @RequestMapping("/api/groups")
 public class GroupController {
 
     @Autowired
-    private GroupService groupService;
+    private GroupServiceLayer groupService;
 
     @PostMapping
-    public Group createGroup(
+    public GroupEntity createGroup(
             @RequestBody CreateGroupRequest request,
             @RequestHeader("userId") UUID userId) {
 
@@ -34,7 +34,7 @@ public class GroupController {
     }
 
     @PutMapping("/{groupId}")
-    public Group updateGroup(
+    public GroupEntity updateGroup(
             @PathVariable UUID groupId,
             @RequestBody UpdateGroupRequest request,
             @RequestHeader("userId") UUID userId) {
