@@ -1,5 +1,9 @@
 package com.messageapp.api.modules.auth.dto;
 
-public class RegisterDto {
+import lombok.Data;
 
+@Data
+public class RegisterDto {
+    private String phone;
+    private String name;
 }

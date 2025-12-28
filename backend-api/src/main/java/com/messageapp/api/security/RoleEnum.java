@@ -1,5 +1,6 @@
 package com.messageapp.api.security;
 
-public class RoleEnum {
-
+public enum RoleEnum {
+    USER,
+    ADMIN
 }
