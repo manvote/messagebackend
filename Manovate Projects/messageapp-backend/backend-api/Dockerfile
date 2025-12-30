@@ -7,6 +7,9 @@ COPY pom.xml .
 COPY mvnw .
 COPY .mvn .mvn
 
+# 🔥 IMPORTANT FIX
+RUN chmod +x mvnw
+
 RUN ./mvnw -B dependency:resolve dependency:resolve-plugins
 
 COPY src src
