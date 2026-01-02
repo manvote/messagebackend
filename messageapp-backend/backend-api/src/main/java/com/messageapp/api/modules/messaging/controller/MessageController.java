@@ -12,11 +12,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/messages")
-public class MessageController {
+public class MessagingController {
 
 	private final MessagingService messagingService;
 
-	public MessageController(MessagingService messagingService) {
+	public MessagingController(MessagingService messagingService) {
 		this.messagingService = messagingService;
 	}
 
