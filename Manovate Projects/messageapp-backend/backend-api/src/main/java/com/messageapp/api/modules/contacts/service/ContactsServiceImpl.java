@@ -3,6 +3,7 @@ package com.messageapp.api.modules.contacts.service;
 
 import com.messageapp.api.modules.contacts.model.ContactEntity;
 import com.messageapp.api.modules.contacts.model.ContactResponse;
+import com.messageapp.api.modules.contacts.model.ContactSearchResponse;
 import com.messageapp.api.modules.contacts.repository.ContactsRepository;
 import com.messageapp.api.modules.contacts.service.ContactsService;
 import com.messageapp.api.modules.user.repository.RepositoryClass;
@@ -25,16 +26,24 @@ public class ContactsServiceImpl implements ContactsService {
         this.userRepository = userRepository;
     }
 
-
-    public ContactsServiceImpl(ContactsRepository contactsRepository) {
-        this.contactsRepository = contactsRepository;
-    }
-
     @Override
     public void addContact(Long ownerUserId, Long contactUserId) {
 
         if (ownerUserId.equals(contactUserId)) {
-            throw new RuntimeException("Cannot add yourself as contact");
+            throw new RuntimeException("Cannot add yourself");
+        }
+
+        boolean blockedEitherWay =
+                !contactsRepository
+                        .findRelationBetweenUsers(ownerUserId, contactUserId)
+                        .isEmpty() &&
+                        contactsRepository
+                                .findRelationBetweenUsers(ownerUserId, contactUserId)
+                                .stream()
+                                .anyMatch(ContactEntity::isBlocked);
+
+        if (blockedEitherWay) {
+            throw new RuntimeException("Cannot add blocked user");
         }
 
         if (contactsRepository.existsByOwnerUserIdAndContactUserId(ownerUserId, contactUserId)) {
@@ -74,6 +83,10 @@ public class ContactsServiceImpl implements ContactsService {
                 .findByOwnerUserIdAndContactUserId(ownerUserId, contactUserId)
                 .orElseThrow(() -> new RuntimeException("Contact not found"));
 
+        if (contact.isBlocked()) {
+            throw new RuntimeException("User already blocked");
+        }
+
         contact.setBlocked(true);
         contactsRepository.save(contact);
     }
@@ -84,27 +97,40 @@ public class ContactsServiceImpl implements ContactsService {
                 .findByOwnerUserIdAndContactUserId(ownerUserId, contactUserId)
                 .orElseThrow(() -> new RuntimeException("Contact not found"));
 
+        if (!contact.isBlocked()) {
+            throw new RuntimeException("User is not blocked");
+        }
+
         contact.setBlocked(false);
         contactsRepository.save(contact);
     }
     @Override
-    public List<ContactResponse> searchContacts(Long ownerUserId, String keyword) {
+    public List<ContactSearchResponse> searchContacts(Long ownerUserId, String keyword) {
 
         String key = keyword.toLowerCase();
 
         return contactsRepository.findByOwnerUserId(ownerUserId)
                 .stream()
-                .filter(c -> !c.isBlocked())
+                .filter(c -> !c.isBlocked()) // owner blocked contact
+                .filter(c ->
+                        !contactsRepository
+                                .existsByOwnerUserIdAndContactUserIdAndBlockedTrue(
+                                        c.getContactUserId(),
+                                        ownerUserId
+                                )
+                )
                 .map(c -> userRepository.findById(c.getContactUserId()).orElse(null))
                 .filter(u -> u != null &&
-                        (u.getName().toLowerCase().contains(key) ||
-                                u.getPhone().contains(key)))
-                .map(u -> new ContactResponse(
+                        (u.getName().toLowerCase().contains(key)
+                                || u.getPhone().contains(key)))
+                .map(u -> new ContactSearchResponse(
                         u.getId(),
                         u.getName(),
                         u.getPhone()
                 ))
                 .toList();
     }
+
+
 
 }

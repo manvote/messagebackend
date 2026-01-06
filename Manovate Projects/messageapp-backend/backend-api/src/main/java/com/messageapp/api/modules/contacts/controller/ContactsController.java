@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
     @RestController
     @RequestMapping("/api/contacts")
     public class ContactsController {
@@ -29,10 +30,9 @@ import java.util.List;
                 @RequestHeader("X-USER-ID") Long ownerUserId,
                 @RequestParam String keyword
         ) {
+
             return contactsService.searchContacts(ownerUserId, keyword);
         }
-
-
 
         @DeleteMapping("/{contactUserId}")
         public void removeContact(
@@ -42,14 +42,12 @@ import java.util.List;
             contactsService.removeContact(ownerUserId, contactUserId);
         }
 
-
         @GetMapping
         public List<ContactResponse> getContacts(
                 @RequestHeader("X-USER-ID") Long ownerUserId
         ) {
             return contactsService.getContacts(ownerUserId);
         }
-
 
         @PostMapping("/{contactUserId}/block")
         public void blockContact(
@@ -58,7 +56,6 @@ import java.util.List;
         ) {
             contactsService.blockContact(ownerUserId, contactUserId);
         }
-
 
         @PostMapping("/{contactUserId}/unblock")
         public void unblockContact(
