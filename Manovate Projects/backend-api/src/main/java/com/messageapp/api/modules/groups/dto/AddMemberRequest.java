@@ -1,4 +1,3 @@
-
 package com.messageapp.api.modules.groups.dto;
 
 import java.util.UUID;
