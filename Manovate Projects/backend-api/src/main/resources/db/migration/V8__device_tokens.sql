@@ -1,0 +1,6 @@
+CREATE TABLE device_tokens (
+    id BIGSERIAL PRIMARY KEY,
+    phone VARCHAR(20) NOT NULL,
+    token VARCHAR(255) NOT NULL,
+    active BOOLEAN DEFAULT TRUE
+);

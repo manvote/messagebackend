@@ -1,0 +1,4 @@
+ALTER TABLE users
+ADD COLUMN display_name VARCHAR(100),
+ADD COLUMN bio VARCHAR(255),
+ADD COLUMN profile_image_url VARCHAR(255);
