@@ -1,4 +1,3 @@
-
 package com.messageapp.api.modules.messaging.model;
 
 import jakarta.persistence.*;
