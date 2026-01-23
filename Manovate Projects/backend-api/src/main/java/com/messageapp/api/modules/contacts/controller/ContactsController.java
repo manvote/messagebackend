@@ -2,6 +2,7 @@ package com.messageapp.api.modules.contacts.controller;
 
 import com.messageapp.api.modules.contacts.model.ContactRequest;
 import com.messageapp.api.modules.contacts.model.ContactResponse;
+import com.messageapp.api.modules.contacts.model.ContactSearchResponse;
 import com.messageapp.api.modules.contacts.service.ContactsService;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ import java.util.List;
             contactsService.addContact(ownerUserId, request.getContactUserId());
         }
         @GetMapping("/search")
-        public List<ContactResponse> searchContacts(
+        public List<ContactSearchResponse> searchContacts(
                 @RequestHeader("X-USER-ID") Long ownerUserId,
                 @RequestParam String keyword
         ) {
