@@ -20,7 +20,7 @@ import com.messageapp.api.modules.groups.service.GroupServiceLayer;
 
 @RestController
 @RequestMapping("/api/groups")
-public class GroupController {
+public class GroupsController  {
 
     @Autowired
     private GroupServiceLayer groupService;
