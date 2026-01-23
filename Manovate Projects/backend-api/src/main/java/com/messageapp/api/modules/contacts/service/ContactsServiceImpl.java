@@ -6,7 +6,8 @@ import com.messageapp.api.modules.contacts.model.ContactResponse;
 import com.messageapp.api.modules.contacts.model.ContactSearchResponse;
 import com.messageapp.api.modules.contacts.repository.ContactsRepository;
 import com.messageapp.api.modules.contacts.service.ContactsService;
-import com.messageapp.api.modules.user.repository.RepositoryClass;
+import com.messageapp.api.modules.user.repository.UserRepository;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.stream.Collectors;
 public class ContactsServiceImpl implements ContactsService {
 
     private final ContactsRepository contactsRepository;
-    private final RepositoryClass userRepository;
+    private final UserRepository userRepository;
 
     public ContactsServiceImpl(
             ContactsRepository contactsRepository,
