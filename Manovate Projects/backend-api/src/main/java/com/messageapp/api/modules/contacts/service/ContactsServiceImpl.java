@@ -105,32 +105,36 @@ public class ContactsServiceImpl implements ContactsService {
         contact.setBlocked(false);
         contactsRepository.save(contact);
     }
-    @Override
-    public List<ContactResponse> searchContacts(Long ownerUserId, String keyword) {
+ @Override
+public List<ContactSearchResponse> searchContacts(Long ownerUserId, String keyword) {
 
-        String key = keyword.toLowerCase();
+    String key = keyword.toLowerCase();
 
-        return contactsRepository.findByOwnerUserId(ownerUserId)
-                .stream()
-                .filter(c -> !c.isBlocked()) // owner blocked contact
-                .filter(c ->
-                        !contactsRepository
-                                .existsByOwnerUserIdAndContactUserIdAndBlockedTrue(
-                                        c.getContactUserId(),
-                                        ownerUserId
-                                )
-                )
-                .map(c -> userRepository.findById(c.getContactUserId()).orElse(null))
-                .filter(u -> u != null &&
-                        (u.getName().toLowerCase().contains(key)
-                                || u.getPhone().contains(key)))
-                .map(u -> new ContactSearchResponse(
-                        u.getId(),
-                        u.getName(),
-                        u.getPhone()
-                ))
-                .toList();
-    }
+    return contactsRepository.findByOwnerUserId(ownerUserId)
+            .stream()
+            .filter(c -> !c.isBlocked())
+            .filter(c ->
+                    !contactsRepository
+                            .existsByOwnerUserIdAndContactUserIdAndBlockedTrue(
+                                    c.getContactUserId(),
+                                    ownerUserId
+                            )
+            )
+            .map(c -> userRepository.findById(c.getContactUserId()).orElse(null))
+            .filter(u -> u != null &&
+                    (
+                        (u.getDisplayName() != null &&
+                         u.getDisplayName().toLowerCase().contains(key))
+                        || u.getPhone().contains(key)
+                    )
+            )
+            .map(u -> new ContactSearchResponse(
+                    u.getId(),
+                    u.getDisplayName(),
+                    u.getPhone()
+            ))
+            .toList();
+}
 
 
 
