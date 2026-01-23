@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
-public class OtpServiceImple implements OtpService {
+public class OtpServiceImpl implements OtpService {
 
     private static final int OTP_EXPIRY_SECONDS = 300;
 
