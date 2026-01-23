@@ -105,7 +105,7 @@ public class ContactsServiceImpl implements ContactsService {
         contactsRepository.save(contact);
     }
     @Override
-    public List<ContactSearchResponse> searchContacts(Long ownerUserId, String keyword) {
+    public List<ContactResponse> searchContacts(Long ownerUserId, String keyword) {
 
         String key = keyword.toLowerCase();
 
