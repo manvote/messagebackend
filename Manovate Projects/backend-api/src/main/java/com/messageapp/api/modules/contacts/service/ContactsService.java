@@ -1,7 +1,7 @@
 package com.messageapp.api.modules.contacts.service;
 
-
 import com.messageapp.api.modules.contacts.model.ContactResponse;
+import com.messageapp.api.modules.contacts.model.ContactSearchResponse;
 
 import java.util.List;
 
@@ -17,6 +17,6 @@ public interface ContactsService {
 
         void unblockContact(Long ownerUserId, Long contactUserId);
 
-        List<ContactResponse> searchContacts(Long ownerUserId, String keyword);
+        List<ContactSearchResponse> searchContacts(Long ownerUserId, String keyword);
 
 }
